@@ -27,7 +27,7 @@ public class BTreePlus<Type> implements java.io.Serializable {
 
     private DefaultMutableTreeNode bArbreToJTree(Noeud<Type> root) {
         StringBuilder txt = new StringBuilder();
-        for (Type key : root.keys)
+        for (Key key : root.keys)
             txt.append(key.toString()).append(" ");
 
         DefaultMutableTreeNode racine2 = new DefaultMutableTreeNode(txt.toString(), true);

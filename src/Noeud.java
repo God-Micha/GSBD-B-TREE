@@ -11,9 +11,8 @@ public class Noeud<Type> implements java.io.Serializable {
 
     // Collection des Noeuds enfants du noeud courant
     public ArrayList<Noeud<Type>> fils = new ArrayList<Noeud<Type>>();
-
     // Collection des cles du noeud courant
-    public ArrayList<Type> keys = new ArrayList<Type>();
+    public ArrayList<Key> keys = new ArrayList<Key>();
 
     // Noeud Parent du noeud courant
     private Noeud<Type> parent;
@@ -21,7 +20,7 @@ public class Noeud<Type> implements java.io.Serializable {
     // Classe interferant "Executable" et donc contenant une procedure de comparaison de <Type>
     private Executable compar;
 
-    // Ordre de l'abre (u = nombre de cl�s maximum = 2m)
+    // Ordre de l'abre (u = nombre de cles maximum = 2m)
     private final int u, tailleMin;
 
 
@@ -81,7 +80,7 @@ public class Noeud<Type> implements java.io.Serializable {
 
             boolean trouve = false;
             while (!trouve && (index < this.keys.size())) {
-                trouve = compare(valeur, this.keys.get(index));
+                trouve = compare(valeur, (Type)this.keys.get(index).key);
                 if (!trouve)
                     index++;
             }
@@ -138,28 +137,6 @@ public class Noeud<Type> implements java.io.Serializable {
         this.keys.remove(valeur);
     }
 
-
-    /**
-     * Algo d'ajout de donnees dans l'arbre :
-     *
-     * On choisit un noeud approprie en recherchant dans l'arbre l'endroit ou devrait se
-     * situer la donnee.
-     * On ajoute la donnee a ce noeud (qui peut ne pas etre une feuille si l'ajout resulte du fait
-     * qu'une donnee mediane d'un noeud fils vient de remonter)
-     * Si la taille du noeud depasse l'ordre de l'arbre, on trouve l'element median,
-     * on le remonte dans son parent (eventuellement on recree une racine), et on cree deux nouveaux noeuds
-     * le premier avec tous les elements dont la comparaison renvoie faux et le deuxieme tous les elements
-     * dont la comparaison renvoie true.
-     * On ajoute les eventuels noeuds fils de notre noeud aux nouveaux noeuds enfants
-     * On raz la collection d'enfants de notre noeud et on y a ajoute nos deux nouveaux noeud gauche et droit
-     * On renvoie la racine (potentiellement la nouvelle)
-     *
-     */
-
-    public Noeud<Type> addValeur(Type nouvelleValeur) {
-        Noeud<Type> racine = addValeur(nouvelleValeur, false);
-        return racine;
-    }
 
     /**
      * Ajoute un noeud fils au noeud courant
@@ -335,8 +312,6 @@ public class Noeud<Type> implements java.io.Serializable {
                 noeud.parent.fils.clear();
             }
         }
-
-
         return racine;
     }
 
@@ -417,7 +392,29 @@ public class Noeud<Type> implements java.io.Serializable {
     }
 
     /**
-     * Ajoute une clef au noeud courant, ceci est une fonction r�cursive
+     * Algo d'ajout de donnees dans l'arbre :
+     *
+     * On choisit un noeud approprie en recherchant dans l'arbre l'endroit ou devrait se
+     * situer la donnee.
+     * On ajoute la donnee a ce noeud (qui peut ne pas etre une feuille si l'ajout resulte du fait
+     * qu'une donnee mediane d'un noeud fils vient de remonter)
+     * Si la taille du noeud depasse l'ordre de l'arbre, on trouve l'element median,
+     * on le remonte dans son parent (eventuellement on recree une racine), et on cree deux nouveaux noeuds
+     * le premier avec tous les elements dont la comparaison renvoie faux et le deuxieme tous les elements
+     * dont la comparaison renvoie true.
+     * On ajoute les eventuels noeuds fils de notre noeud aux nouveaux noeuds enfants
+     * On raz la collection d'enfants de notre noeud et on y a ajoute nos deux nouveaux noeud gauche et droit
+     * On renvoie la racine (potentiellement la nouvelle)
+     *
+     */
+
+    public Noeud<Type> addValeur(Type nouvelleValeur) {
+        Noeud<Type> racine = addValeur(nouvelleValeur, false);
+        return racine;
+    }
+
+    /**
+     * Ajoute une clef au noeud courant, ceci est une fonction recursive
      * @param nouvelleValeur a ajouter
      * @param force, booleen specificiant que l'on doit ajouter au noeud courant et non pas chercher l'endroit ou inserer la nouvelle valeur
      * @return la <Noeud>racine</Noeud> de l'arbre
