@@ -48,6 +48,7 @@ public class Noeud<Type> implements java.io.Serializable {
     public Noeud<Type> contient(Type valeur) {
         Noeud<Type> retour = null;
 
+
         if (this.keys.contains(valeur) && (this.fils.isEmpty())) {
             retour = this;
         } else {

@@ -10,8 +10,10 @@ import java.util.ArrayList;
  * @author Galli Gregory, Mopolo Moke Gabriel
  */
 public class GUI extends JFrame implements ActionListener {
-    TestInteger testInt = new TestInteger();
-    BTreePlus<Integer> bInt;
+    TestKey comparKey = new TestKey();
+    BTreePlus<Key> bKey;
+
+    Integer index = 1;
     private JButton buttonClean, buttonRemove, buttonLoad, buttonSave, buttonAddMany, buttonAddItem, buttonRefresh;
     private JTextField txtNbreItem, txtNbreSpecificItem, txtU, txtFile, removeSpecific;
     private final JTree tree = new JTree();
@@ -24,29 +26,29 @@ public class GUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonLoad || e.getSource() == buttonClean || e.getSource() == buttonSave || e.getSource() == buttonRefresh) {
             if (e.getSource() == buttonLoad) {
-                BDeserializer<Integer> load = new BDeserializer<Integer>();
-                bInt = load.getArbre(txtFile.getText());
-                if (bInt == null)
+                BDeserializer<Key> load = new BDeserializer<Key>();
+                bKey = load.getArbre(txtFile.getText());
+                if (bKey == null)
                     System.out.println("Echec du chargement.");
 
             } else if (e.getSource() == buttonClean) {
                 if (Integer.parseInt(txtU.getText()) < 2)
                     System.out.println("Impossible de creer un arbre dont le nombre de cles est inferieur a 2.");
                 else
-                    bInt = new BTreePlus<Integer>(Integer.parseInt(txtU.getText()), testInt);
+                    bKey = new BTreePlus<Key>(Integer.parseInt(txtU.getText()), comparKey);
             } else if (e.getSource() == buttonSave) {
-                BSerializer<Integer> save = new BSerializer<Integer>(bInt, txtFile.getText());
+                BSerializer<Key> save = new BSerializer<Key>(bKey, txtFile.getText());
             }else if (e.getSource() == buttonRefresh) {
                 tree.updateUI();
             }
         } else {
-            if (bInt == null)
-                bInt = new BTreePlus<Integer>(Integer.parseInt(txtU.getText()), testInt);
+            if (bKey == null)
+                bKey = new BTreePlus<Key>(Integer.parseInt(txtU.getText()), comparKey);
 
             if (e.getSource() == buttonAddMany) {
                 for (int i = 0; i < Integer.parseInt(txtNbreItem.getText()); i++) {
-                    int valeur = (int) (Math.random() * 10 * Integer.parseInt(txtNbreItem.getText()));
-                    boolean done = bInt.addValeur(valeur);
+                    Key valeur = new Key((int)(Math.random() * 10 * Integer.parseInt(txtNbreItem.getText())), index);
+                    boolean done = bKey.addValeur(valeur);
 
 					/**
 					  On pourrait forcer l'ajout mais on risque alors de tomber dans une boucle infinie sans "regle" faisant sens pour en sortir
@@ -60,7 +62,9 @@ public class GUI extends JFrame implements ActionListener {
                 }
 
             } else if (e.getSource() == buttonAddItem) {
-                if (!bInt.addValeur(Integer.parseInt(txtNbreSpecificItem.getText())))
+                /* On peut placer l'index car il n'a aucune importance pour la recherche, le equals utilisé dans contains de contient a été override */
+                Key valeur = new Key(Integer.parseInt(txtNbreSpecificItem.getText()),index);
+                if (!bKey.addValeur(valeur))
                     System.out.println("Tentative d'ajout d'une valeur existante : " + txtNbreSpecificItem.getText());
                 txtNbreSpecificItem.setText(
                         String.valueOf(
@@ -69,11 +73,13 @@ public class GUI extends JFrame implements ActionListener {
                 );
 
             } else if (e.getSource() == buttonRemove) {
-                bInt.removeValeur(Integer.parseInt(removeSpecific.getText()));
+                /* On peut placer l'index car il n'a aucune importance pour la recherche, le equals utilisé dans contains de contient a été override */
+                Key valeur = new Key(Integer.parseInt(removeSpecific.getText()),index);
+                bKey.removeValeur(valeur);
             }
         }
 
-        tree.setModel(new DefaultTreeModel(bInt.bArbreToJTree()));
+        tree.setModel(new DefaultTreeModel(bKey.bArbreToJTree()));
         for (int i = 0; i < tree.getRowCount(); i++)
             tree.expandRow(i);
 
