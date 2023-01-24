@@ -12,7 +12,7 @@ public class Noeud<Type> implements java.io.Serializable {
     // Collection des Noeuds enfants du noeud courant
     public ArrayList<Noeud<Type>> fils = new ArrayList<Noeud<Type>>();
     // Collection des cles du noeud courant
-    public ArrayList<Key> keys = new ArrayList<Key>();
+    public ArrayList<Type> keys = new ArrayList<Type>();
 
     // Noeud Parent du noeud courant
     private Noeud<Type> parent;
@@ -80,7 +80,7 @@ public class Noeud<Type> implements java.io.Serializable {
 
             boolean trouve = false;
             while (!trouve && (index < this.keys.size())) {
-                trouve = compare(valeur, (Type)this.keys.get(index).key);
+                trouve = compare(valeur, this.keys.get(index));
                 if (!trouve)
                     index++;
             }

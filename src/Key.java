@@ -4,10 +4,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 
 public class Key {
-    public Type key;
+    public int key;
     public int ligneFichier;
 
-    Key(Type k, int ligne){
+    Key(int k, int ligne){
         key = k;
         ligneFichier = ligne;
     }
