@@ -1,0 +1,234 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "Noeud",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1061645268 { 
+   	label=TestInteger
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   TestInteger1061645268[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TestInteger</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ execute(int1: Integer, int2: Integer): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1877182278 { 
+   	label=BTreePlus
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   BTreePlus1877182278[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BTreePlus&lt;Type&gt;</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   racine: Noeud&lt;Type&gt; [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addValeur(valeur: Type): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ afficheArbre()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ bArbreToJTree(): DefaultMutableTreeNode</TD></TR>
+<TR><TD ALIGN="LEFT" >- bArbreToJTree(root: Noeud&lt;Type&gt;): DefaultMutableTreeNode</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removeValeur(valeur: Type)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_573753501 { 
+   	label=TestString
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   TestString573753501[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TestString</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ execute(str1: String, str2: String): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_70939 { 
+   	label=GUI
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   GUI70939[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GUI</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   bInt: BTreePlus&lt;Integer&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   buttonAddItem: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   buttonAddMany: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   buttonClean: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   buttonLoad: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   buttonRefresh: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   buttonRemove: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   buttonSave: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   removeSpecific: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   testInt: TestInteger [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tree: JTree [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   txtFile: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   txtNbreItem: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   txtNbreSpecificItem: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   txtU: JTextField [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ actionPerformed(e: ActionEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >- build()</TD></TR>
+<TR><TD ALIGN="LEFT" >- buildContentPane(): JPanel</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_75442227 { 
+   	label=Noeud
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Noeud75442227[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Noeud&lt;Type&gt;</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   compar: Executable [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   fils: ArrayList&lt;Noeud&lt;Type&gt;&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   keys: ArrayList&lt;Type&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   parent: Noeud&lt;Type&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tailleMin: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   u: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addNoeud(noeud: Noeud&lt;Type&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ addValeur(nouvelleValeur: Type): Noeud&lt;Type&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ addValeur(nouvelleValeur: Type, force: boolean): Noeud&lt;Type&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ afficheNoeud(afficheSousNoeuds: boolean, lvl: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ choixNoeudAjout(valeur: Type): Noeud&lt;Type&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ compare(arg1: Type, arg2: Type): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ contient(valeur: Type): Noeud&lt;Type&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- insert(valeur: Type)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ parentContient(noeud: Noeud&lt;Type&gt;, valeur: Type): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ reequilibrer(keyz: ArrayList&lt;Type&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- removeKey(valeur: Type)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removeNoeud(noeud: Noeud&lt;Type&gt;): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removeValeur(valeur: Type, force: boolean): Noeud&lt;Type&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ remplacerDansParents(noeud: Noeud&lt;Type&gt;, aRemplacer: Type, remplacant: Type)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+BTreePlus1877182278 -> Noeud75442227[label="racine
+[0..1]"];
+GUI70939 -> BTreePlus1877182278[label="bInt
+[0..1]"];
+Noeud75442227 -> TestInteger1061645268[arrowhead=none];
+Noeud75442227 -> TestString573753501[arrowhead=none];
+    
+}
+@enduml
