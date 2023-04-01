@@ -14,7 +14,7 @@ public class GUI extends JFrame implements ActionListener {
     BTreePlus<Key> bKey;
 
     Integer index = 1;
-    private JButton buttonClean, buttonRemove, buttonLoad, buttonSave, buttonAddMany, buttonAddItem, buttonRefresh;
+    private JButton buttonClean, buttonRemove, buttonLoad, buttonSave, buttonAddMany, buttonAddItem, buttonRefresh, buttonLoadTxt;
     private JTextField txtNbreItem, txtNbreSpecificItem, txtU, txtFile, removeSpecific;
     private final JTree tree = new JTree();
 
@@ -40,6 +40,20 @@ public class GUI extends JFrame implements ActionListener {
                 BSerializer<Key> save = new BSerializer<Key>(bKey, txtFile.getText());
             }else if (e.getSource() == buttonRefresh) {
                 tree.updateUI();
+            }else if (e.getSource() == buttonLoadTxt){
+                // POUR CHAQUES LIGNES
+                //        try(BufferedReader br = new BufferedReader(new FileReader(txtFile.getText())))
+                //        {
+                //            String line;
+                //            while ((line = br.readLine()) != null) {
+                //              Key valeur = new Key((int)line,i);
+                //              bKey.addvaleur(valeur);
+                //            }
+                //        }
+                //        catch (IOException e) {
+                //            System.out.println("An error occurred.");
+                //            e.printStackTrace();
+                //        }
             }
         } else {
             if (bKey == null)
@@ -47,18 +61,18 @@ public class GUI extends JFrame implements ActionListener {
 
             if (e.getSource() == buttonAddMany) {
                 for (int i = 0; i < Integer.parseInt(txtNbreItem.getText()); i++) {
-                    Key valeur = new Key((int)(Math.random() * 10 * Integer.parseInt(txtNbreItem.getText())), index);
+                    Key valeur = new Key((int) (Math.random() * 10 * Integer.parseInt(txtNbreItem.getText())), index);
                     boolean done = bKey.addValeur(valeur);
 
-					/**
-					  On pourrait forcer l'ajout mais on risque alors de tomber dans une boucle infinie sans "regle" faisant sens pour en sortir
+                    /**
+                     On pourrait forcer l'ajout mais on risque alors de tomber dans une boucle infinie sans "regle" faisant sens pour en sortir
 
-					while (!done)
-					{
-						valeur =(int) (Math.random() * 10 * Integer.parseInt(txtNbreItem.getText()));
-						done = bInt.addValeur(valeur);
-					}
-					 */
+                     while (!done)
+                     {
+                     valeur =(int) (Math.random() * 10 * Integer.parseInt(txtNbreItem.getText()));
+                     done = bInt.addValeur(valeur);
+                     }
+                     */
                 }
 
             } else if (e.getSource() == buttonAddItem) {
@@ -209,14 +223,21 @@ public class GUI extends JFrame implements ActionListener {
 
         buttonClean = new JButton("Reset");
         c.gridx = 2;
-        c.gridy = 6;
+        c.gridy = 7;
         c.weightx = 1;
         c.gridwidth = 2;
         pane1.add(buttonClean, c);
 
+        buttonLoadTxt = new JButton("Charger le fichier Txt");
+        c.gridx= 2;
+        c.gridy = 6;
+        c.weightx = 1;
+        c.gridwidth = 2;
+        pane1.add(buttonLoadTxt, c);
+
         buttonRefresh = new JButton("Refresh");
         c.gridx = 2;
-        c.gridy = 7;
+        c.gridy = 8;
         c.weightx = 1;
         c.gridwidth = 2;
         pane1.add(buttonRefresh, c);
@@ -226,7 +247,7 @@ public class GUI extends JFrame implements ActionListener {
         c.weighty = 1.0;   //request any extra vertical space
         c.gridwidth = 4;   //2 columns wide
         c.gridx = 0;
-        c.gridy = 8;
+        c.gridy = 9;
 
         JScrollPane scrollPane = new JScrollPane(tree);
         pane1.add(scrollPane, c);
@@ -242,6 +263,7 @@ public class GUI extends JFrame implements ActionListener {
         buttonRemove.addActionListener(this);
         buttonClean.addActionListener(this);
         buttonRefresh.addActionListener(this);
+        buttonLoadTxt.addActionListener(this);
 
         return pane1;
     }

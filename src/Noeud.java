@@ -23,6 +23,9 @@ public class Noeud<Type> implements java.io.Serializable {
     // Ordre de l'abre (u = nombre de cles maximum = 2m)
     private final int u, tailleMin;
 
+    // Voisin du noeud
+    private Noeud<Type> voisin;
+
 
     /** Constructeur de la classe noeud, qui permet l'ajout et la recherche d'element dans les branches
      * @param u Nombre de cles maximum du noeud
@@ -511,7 +514,7 @@ public class Noeud<Type> implements java.io.Serializable {
                     // On modifie alors la racine pour faire de notre nouveau noeud, la racine de l'arbre
                     racine = nouveauParent;
                 } else {
-                    // Sinon, on ajoute les noeuds gauche et droit comme fils du parent du noeud courant (faisant des noeuds gauche et droit des fr�res du noeud courant)
+                    // Sinon, on ajoute les noeuds gauche et droit comme fils du parent du noeud courant (faisant des noeuds gauche et droit des freres du noeud courant)
                     noeud.parent.addNoeud(noeudGauche);
                     noeud.parent.addNoeud(noeudDroit);
                     noeudGauche.parent = noeud.parent;
@@ -520,7 +523,7 @@ public class Noeud<Type> implements java.io.Serializable {
                     // On retire le noeud courant des fils du parent ( les noeuds gauche et droit viennent le remplacer )
                     noeud.parent.removeNoeud(noeud);
 
-                    // Et on fini par ajouter l'�l�ment m�dian laiss� de c�t� plus t�t au parent du noeud courant ( on remonte la clef dans le parent )
+                    // Et on fini par ajouter l'element median laisse de cote plus tot au parent du noeud courant ( on remonte la clef dans le parent )
                     racine = noeud.parent.addValeur(eleMedian, true);
                 }
 

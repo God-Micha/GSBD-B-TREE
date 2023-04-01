@@ -21,7 +21,7 @@ public class Key {
         if (o == this) {
             return true;
         }
-        if (o instanceof Key){
+        if (!(o instanceof Key)){
             return false;
         }
         Key k = (Key)o;
