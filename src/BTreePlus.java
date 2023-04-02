@@ -58,4 +58,18 @@ public class BTreePlus<Type> implements java.io.Serializable {
                 racine = newRacine;
         }
     }
+
+    public Key rechercheIndexKey(Type valeur){
+        Noeud<Type> retour = racine.contient(valeur);
+        Key keyretour = null;
+        for(int i=0; i< retour.keys.size(); i++) {
+            if(retour.keys.get(i).equals(valeur)){
+                keyretour = (Key)retour.keys.get(i);
+            }
+        }
+        if(keyretour != null) {
+            return keyretour;
+        }
+        return null;
+    }
 }

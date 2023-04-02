@@ -12,10 +12,14 @@ public class Key {
         ligneFichier = ligne;
     }
 
+    @Override
+    public String toString() {
+        return "{" + ligneFichier + " : " + Integer.toString(key) + "}";
+    }
 
     /* Override de la fonction equals pour l'objet keys car nous voulons
-       Prouver l'egalité que grâce a la clé et non grâce a l'index
-    */
+           Prouver l'egalité que grâce a la clé et non grâce a l'index
+        */
     @Override
     public boolean equals(Object o) {
         if (o == this) {

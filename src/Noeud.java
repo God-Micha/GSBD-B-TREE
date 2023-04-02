@@ -357,7 +357,7 @@ public class Noeud<Type> implements java.io.Serializable {
                     break;
                 }
                 // Si le fils que l'on analyse est le noeud dont on cherche le noeud suivant alors on prendra le prochain fils
-                // Il sera retourn� � la prochaine it�ration si prochaine it�ration il y a, sinon pas de next
+                // Il sera retourne a la prochaine iteration si prochaine iteration il y a, sinon pas de next
                 if (fils == this)
                     trouve = true;
             }
@@ -443,35 +443,35 @@ public class Noeud<Type> implements java.io.Serializable {
         // On note le nombre de clef dans le noeud courant avant de commencer
         int tailleListe = noeud.keys.size();
 
-        // On v�rifie que la valeur ne soit pas d�j� pr�sente dans l'arbre (juste au cas o�)
+        // On verifie que la valeur ne soit pas deja presente dans l'arbre (juste au cas ou)
         if (!noeud.keys.contains(nouvelleValeur)) {
 
-            // Si le nombre de clef du noeud courant est �gal au nom max d'�l�ments (2m)
+            // Si le nombre de clef du noeud courant est egal au nom max d'elements (2m)
             if (tailleListe >= u) {
 
 
-                // On cr�e deux nouveaux noeuds
+                // On cree deux nouveaux noeuds
                 Noeud<Type> noeudGauche = new Noeud<Type>(u, compar, null);
                 Noeud<Type> noeudDroit = new Noeud<Type>(u, compar, null);
 
-                // On ins�re la valeur comme nouvelle clef du noeud courant
+                // On insere la valeur comme nouvelle clef du noeud courant
                 noeud.insert(nouvelleValeur);
                 tailleListe++;
 
-                // On v�rifie le nombre de clefs dans le noeud courant pour savoir si on a une clef centrale ou si la m�diane se trouve entre deux clefs
+                // On verifie le nombre de clefs dans le noeud courant pour savoir si on a une clef centrale ou si la m�diane se trouve entre deux clefs
                 if (tailleListe % 2 == 0)
                     indexMedian = (tailleListe / 2);
                 else
                     indexMedian = ((1 + tailleListe) / 2) - 1;
 
-                // On r�cup�re la valeur centrale du noeud courant pour plus tard
+                // On recupere la valeur centrale du noeud courant pour plus tard
                 eleMedian = noeud.keys.get(indexMedian);
 
-                // On utilise un appel r�cursif pour ajouter au noeud gauche, les clefs du noeud courant
+                // On utilise un appel recursif pour ajouter au noeud gauche, les clefs du noeud courant
                 for (int i = 0; i < indexMedian; i++)
                     noeudGauche.addValeur(noeud.keys.get(i));
 
-                // Puis on fait de m�me avec le noeud droit sans traiter la clef centrale si le noeud courant a des fils
+                // Puis on fait de meme avec le noeud droit sans traiter la clef centrale si le noeud courant a des fils
                 if (!noeud.fils.isEmpty()) {
                     for (int i = indexMedian + 1; i < tailleListe; i++)
                         noeudDroit.addValeur(noeud.keys.get(i));
@@ -484,13 +484,13 @@ public class Noeud<Type> implements java.io.Serializable {
                 if (!noeud.fils.isEmpty()) {
                     indexMedian++;
 
-                    // On ajoute au noeud gauche les fils du noeud courant qui sont � gauche de la m�diane
+                    // On ajoute au noeud gauche les fils du noeud courant qui sont a gauche de la mediane
                     for (int i = 0; i < (indexMedian); i++) {
                         noeudGauche.addNoeud(noeud.fils.get(i));
                         noeud.fils.get(i).parent = noeudGauche;
                     }
 
-                    // Et on ajoute au noeud droit les fils du noeud courant qui sont sur la m�diane ou � droite de la m�diane
+                    // Et on ajoute au noeud droit les fils du noeud courant qui sont sur la mediane ou a droite de la mediane
                     for (int i = (indexMedian); i < noeud.fils.size(); i++) {
                         noeudDroit.addNoeud(noeud.fils.get(i));
                         noeud.fils.get(i).parent = noeudDroit;
@@ -499,7 +499,7 @@ public class Noeud<Type> implements java.io.Serializable {
 
                 // Enfin, si le noeud courant est la racine
                 if (noeud.parent == null) {
-                    // On cr�e un nouveau noeud qui prendra sa place
+                    // On cree un nouveau noeud qui prendra sa place
                     Noeud<Type> nouveauParent = new Noeud<Type>(u, compar, null);
 
                     // Qui deviendra le parent des noeuds gauche et droit
